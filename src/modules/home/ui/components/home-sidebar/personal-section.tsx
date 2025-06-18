@@ -1,0 +1,62 @@
+'use client';
+
+import {
+  FlameIcon,
+  HistoryIcon,
+  HomeIcon,
+  ListVideoIcon,
+  PlaySquareIcon,
+  ThumbsUpIcon,
+} from 'lucide-react';
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import Link from 'next/link';
+
+const items = [
+  {
+    title: '시청 기록',
+    url: '/playlists/history',
+    icon: HistoryIcon,
+  },
+  {
+    title: '재생목록',
+    url: '/playlists',
+    icon: ListVideoIcon,
+    auth: true,
+  },
+  {
+    title: '좋아요 표시한 동영상',
+    url: '/playlists/liked',
+    icon: ThumbsUpIcon,
+    auth: true,
+  },
+];
+
+export const PersonalSection = () => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>내 페이지</SidebarGroupLabel>
+
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {items.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton tooltip={item.title} asChild isActive={false} onClick={() => {}}>
+                <Link href={item.url} className="flex item-center gap-4">
+                  <item.icon />
+                  <span className="text-sm">{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
